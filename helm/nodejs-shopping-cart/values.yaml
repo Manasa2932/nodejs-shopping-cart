@@ -1,14 +1,14 @@
 replicaCount: 2
 
 image:
-  repository: luckyregistry11.azurecr.io/nodejs-shopping-cart
+  repository: luckyregistry11.azurecr.io/nodejs-shpping-cart
   tag: latest
   pullPolicy: Always
 
 containerPort: 3000
 
 service:
-  type: ClusterIP
+  type: LoadBalancer
   port: 80
   targetPort: 3000
 
