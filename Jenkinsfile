@@ -29,20 +29,19 @@ pipeline {
         }
 
         stage('SonarQube SAST Scan') {
-            steps {
-                withSonarQubeEnv('SonarQube') {
-                    sh '''
-                    sonar-scanner \
-                    -Dsonar.projectKey=nodejs-shopping-cart \
-                    -Dsonar.projectName=nodejs-shopping-cart \
-                    -Dsonar.sources=. \
-                    -Dsonar.exclusions=node_modules/**,helm/**,data/** \
-                    -Dsonar.host.url=$SONAR_HOST_URL \
-                    -Dsonar.login=$SONAR_AUTH_TOKEN
-                    '''
+                steps {
+                    withSonarQubeEnv('SonarQube') {
+                        sh '''
+                        sonar-scanner \
+                        -Dsonar.projectKey=nodejs-shopping-cart_12345 \
+                        -Dsonar.projectName=nodejs-shopping-cart \
+                        -Dsonar.sources=. \
+                        -Dsonar.exclusions=node_modules/**,helm/**,data/** \
+                        -Dsonar.token=$SONAR_AUTH_TOKEN
+                        '''
+                    }
                 }
             }
-        }
 
         stage('Quality Gate') {
             steps {
@@ -57,6 +56,7 @@ pipeline {
                 withCredentials([string(credentialsId: 'snyk-token', variable: 'SNYK_TOKEN')]) {
                     sh '''
                     snyk test --severity-threshold=high
+                    synk monitor
                     '''
                 }
             }
