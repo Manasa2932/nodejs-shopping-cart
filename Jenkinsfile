@@ -57,6 +57,8 @@ pipeline {
             steps {
                 withCredentials([string(credentialsId: 'snyk-token', variable: 'SNYK_TOKEN')]) {
                     sh '''
+                    npm install -g snyk
+                    snyk --version 
                     snyk test --severity-threshold=high
                     snyk monitor
                     '''
