@@ -1,8 +1,9 @@
 pipeline {
     agent any
-
+    tools {
+        nodejs 'nodejs'
+    }
     environment {
-        PATH = "/home/LakshmiNarayana/.nvm/versions/node/v24.15.0/bin:${env.PATH}"
         ACR_NAME = 'luckyregistry11'
         ACR_LOGIN_SERVER = 'luckyregistry11.azurecr.io'
         IMAGE_NAME = 'nodejs-shpping-cart'
