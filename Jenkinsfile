@@ -55,7 +55,7 @@ pipeline {
 
         stage('Snyk SCA Scan') {
             steps {
-                withCredentials([string(credentialsId: 'snyk-token', variable: 'SNYK_TOKEN')]) {
+                withCredentials([string(credentialsId: 'SNYK_TOKEN', variable: 'SNYK_TOKEN')]) {
                     sh '''
                     npm install -g snyk
                     snyk --version 
