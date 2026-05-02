@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: shoppingcart-deployment
+  labels:
+    app: shoppingcart
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: shoppingcart
+  template:
+    metadata:
+      labels:
+        app: shoppingcart
+    spec:
+      containers:
+      - name: shoppingcart-container
+        image: manasashoppingcart:latest
+        ports:
+        - containerPort: 3000
+        imagePullPolicy: IfNotPresent
